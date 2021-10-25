@@ -8,26 +8,28 @@ import { fetchUsers } from './store/reducers/ActionCreators';
 import { userSlice } from './store/reducers/UserSlice';
 
 function App() {
-    const { count } = useAppSelector(state => state.userReducer)
-    const { users } = useAppSelector(state => state.userReducer)
+    const { count, users, isLoading, error } = useAppSelector(state => state.userReducer)
     const { increment } = userSlice.actions
 
     const dispatch = useAppDispatch()
     useEffect(() => {
-        if (!!users) dispatch(fetchUsers())
+        dispatch(fetchUsers())
     }, [])
+    console.log('error', error);
 
     return (
         <div className="App">
             <h1>count: {count}</h1>
             <button onClick={() => dispatch(increment(1))}>inc</button>
-            {users.map(user => {
+            {isLoading && <h4>ЗАГРУЗКА!!!!</h4>}
+            {error && <h1>{error}</h1>}
+            {users?.map((user, i) => {
                 return (
-                    <>
+                    <div key={i}>
                         <div>{user.email}</div>
                         <div>{user.id}</div>
                         <div>{user.name}</div>
-                    </>
+                    </div>
                 )
             })}
         </div>

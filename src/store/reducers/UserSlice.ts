@@ -24,20 +24,20 @@ export const userSlice = createSlice({
             state.count += action.payload
         },
 
-        usersFetching(state) {
-            state.isLoading = true
-        },
+        // usersFetching(state) {
+        //     state.isLoading = true
+        // },
 
-        usersFetchingSuccess(state, { payload }: PayloadAction<IUser[]>) {
-            state.isLoading = false
-            state.error = ''
-            state.users = payload
-        },
-        usersFetchingError(state, { payload }: PayloadAction<IUser[]>) {
-            state.isLoading = false
-            state.error = 'Missing users'
-            state.users = payload
-        },
+        // usersFetchingSuccess(state, { payload }: PayloadAction<IUser[]>) {
+        //     state.isLoading = false
+        //     state.error = ''
+        //     state.users = payload
+        // },
+        // usersFetchingError(state, { payload }: PayloadAction<IUser[]>) {
+        //     state.isLoading = false
+        //     state.error = 'Missing users'
+        //     state.users = payload
+        // },
     },
     extraReducers: {
         [fetchUsers.pending.type]: (state) => {
@@ -49,6 +49,7 @@ export const userSlice = createSlice({
             state.users = payload
         },
         [fetchUsers.rejected.type]: (state, { payload }: PayloadAction<string>) => {
+            debugger
             state.isLoading = false
             state.error = payload
         }
