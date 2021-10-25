@@ -4,9 +4,7 @@ import App from './App';
 import { Provider } from "react-redux";
 
 ReactDOM.render(
-  <Provider>
-    <App />
-  </Provider>,
+  <App />,
   document.getElementById('root')
 );
 
