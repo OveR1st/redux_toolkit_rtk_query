@@ -1,11 +1,14 @@
 import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { $CombinedState } from 'redux';
 import './App.css';
+
 import { useAppDispatch, useAppSelector } from './hooks/redux';
-import { IUser } from './models/IUser';
+
 import { fetchUsers } from './store/reducers/ActionCreators';
 import { userSlice } from './store/reducers/UserSlice';
+
+import PostContainer from "./components/PostContainer";
+import PostContainer2 from "./components/PostContainer2";
+
 
 function App() {
     const { count, users, isLoading, error } = useAppSelector(state => state.userReducer)
@@ -15,7 +18,6 @@ function App() {
     useEffect(() => {
         dispatch(fetchUsers())
     }, [])
-    console.log('error', error);
 
     return (
         <div className="App">
@@ -23,7 +25,7 @@ function App() {
             <button onClick={() => dispatch(increment(1))}>inc</button>
             {isLoading && <h4>ЗАГРУЗКА!!!!</h4>}
             {error && <h1>{error}</h1>}
-            {users?.map((user, i) => {
+            {/* {users?.map((user, i) => {
                 return (
                     <div key={i}>
                         <div>{user.email}</div>
@@ -31,7 +33,11 @@ function App() {
                         <div>{user.name}</div>
                     </div>
                 )
-            })}
+            })} */}
+            <div style={{ display: 'flex' }}>
+                <PostContainer />
+                <PostContainer2 />
+            </div>
         </div>
     );
 }
